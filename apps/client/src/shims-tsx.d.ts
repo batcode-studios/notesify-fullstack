@@ -3,14 +3,14 @@ import Vue, { VNode } from 'vue';
 declare global {
   namespace JSX {
     // tslint:disable no-empty-interface
-    interface Element extends VNode {
+    interface IElement extends VNode {
     }
 
     // tslint:disable no-empty-interface
-    interface ElementClass extends Vue {
+    interface IElementClass extends Vue {
     }
 
-    interface IntrinsicElements {
+    interface IIntrinsicElements {
       [elem: string]: any;
     }
   }
