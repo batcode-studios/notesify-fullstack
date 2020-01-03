@@ -1,0 +1,25 @@
+{
+  "name": "notesify",
+  "version": "1.0.0",
+  "description": "A Notes taking for Developers from a Developer",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/batcodestudios/notesify-fullstack.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Em Ji Madhu",
+    "email": "emjimadhu@gmail.com"
+  },
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/batcodestudios/notesify-fullstack#readme",
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0",
+    "yarn": ">=1.21.0"
+  }
+}
