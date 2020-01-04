@@ -38,24 +38,21 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <hello-world/>
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import HelloWorld from './components/hello-world.vue';
+  import { Component, Vue } from 'vue-property-decorator';
 
-  export default Vue.extend({
-    name: 'App',
+  import HelloWorldComponent from '@/components/hello-world.component.vue';
 
+  @Component({
     components: {
-      HelloWorld,
-    },
-
-    data: () => ({
-      //
-    }),
-  });
+      'hello-world': HelloWorldComponent
+    }
+  })
+  export default class AppComponent extends Vue {
+  }
 </script>
