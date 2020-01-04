@@ -13,6 +13,7 @@
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
     "utils:add:client:package": "cd apps/client && yarn add:package $1",
     "utils:add:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts -- --type=component",
+    "dev:root:lint": "tslint --project .",
     "preinstall": "$npm_execpath --silent run checkYarn",
     "postinstall": "cd apps/client && yarn install",
     "checkYarn": "echo \"$npm_execpath\" | grep -q \"yarn\\.js$\" || (echo '⚠️  Use YARN not NPM! ⚠️ ' && echo && exit 1)"
