@@ -11,7 +11,10 @@
     "test:client:e2e": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:e2e",
     "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts",
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
-    "utils:add:client:package": "cd apps/client && yarn add:package $1"
+    "utils:add:client:package": "cd apps/client && yarn add:package $1",
+    "preinstall": "$npm_execpath --silent run checkYarn",
+    "postinstall": "cd apps/client && yarn install",
+    "checkYarn": "echo \"$npm_execpath\" | grep -q \"yarn\\.js$\" || (echo '⚠️  Use YARN not NPM! ⚠️ ' && echo && exit 1)"
   },
   "repository": {
     "type": "git",
