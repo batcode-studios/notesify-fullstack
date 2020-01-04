@@ -9,13 +9,16 @@
     "prod:client:build": "yarn substep:set-environment:client -- --environment=prod && cd apps/client && yarn build",
     "test:client:unit": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:unit",
     "test:client:e2e": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:e2e",
+    "dev:barrel:shared": "barrel-maintainer apps/shared/src --includeRootDir --singleQuotes --ts",
     "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts",
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
     "utils:add:client:package": "cd apps/client && yarn add:package $1",
     "utils:add:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts -- --type=component",
+    "utils:install-packages:client": "cd apps/client && yarn install",
+    "utils:install-packages:shared": "cd apps/shared && yarn install",
     "dev:root:lint": "tslint --project .",
     "preinstall": "$npm_execpath --silent run checkYarn",
-    "postinstall": "cd apps/client && yarn install",
+    "postinstall": "yarn utils:install-packages:shared && yarn utils:install-packages:client",
     "checkYarn": "echo \"$npm_execpath\" | grep -q \"yarn\\.js$\" || (echo '⚠️  Use YARN not NPM! ⚠️ ' && echo && exit 1)"
   },
   "repository": {

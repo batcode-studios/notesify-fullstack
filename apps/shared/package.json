@@ -1,0 +1,22 @@
+{
+  "name": "@notesify/shared",
+  "version": "1.0.0",
+  "description": "A shared codes for the entire project",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/batcodestudios/notesify-fullstack.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Em Ji Madhu",
+    "email": "emjimadhu@gmail.com"
+  },
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/batcodestudios/notesify-fullstack#readme",
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0",
+    "yarn": ">=1.21.0"
+  }
+}
