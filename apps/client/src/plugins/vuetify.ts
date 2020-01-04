@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuetify, { VAppBar, VBtn, VIcon, VImg, VSpacer } from 'vuetify/lib';
+import Vuetify, { VApp, VAppBar, VBtn, VContainer, VContent, VFlex, VIcon, VImg, VLayout, VSpacer } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
   components: {
@@ -7,7 +7,12 @@ Vue.use(Vuetify, {
     VImg,
     VSpacer,
     VBtn,
-    VIcon
+    VIcon,
+    VApp,
+    VContent,
+    VContainer,
+    VLayout,
+    VFlex
   }
 });
 
