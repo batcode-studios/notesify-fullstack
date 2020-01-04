@@ -13,14 +13,60 @@
       "spaces",
       2
     ],
-    "interface-name": true,
+    "interface-name": [
+      true,
+      "always-prefix"
+    ],
     "no-consecutive-blank-lines": true,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "trailing-comma": false,
     "quotemark": [
       true,
-      "single"
+      "single",
+      "avoid-escape"
+    ],
+    "ban-comma-operator": true,
+    "align": [
+      true,
+      "statements"
+    ],
+    "array-type": [
+      true,
+      "array"
+    ],
+    "arrow-parens": true,
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "curly": true,
+    "eofline": true,
+    "file-name-casing": [
+      true,
+      "kebab-case"
+    ],
+    "import-spacing": true,
+    "member-access": [
+      true,
+      "check-accessor"
+    ],
+    "no-async-without-await": true,
+    "no-console": true,
+    "no-duplicate-imports": true,
+    "no-duplicate-variable": true,
+    "no-duplicate-switch-case": true,
+    "no-var-keyword": true,
+    "prefer-const": true,
+    "prefer-switch": true,
+    "switch-final-break": [
+      true,
+      "always"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
     ]
   }
 }
