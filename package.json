@@ -4,7 +4,7 @@
   "description": "A Notes taking for Developers from a Developer",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,15 @@
     "yarn": ">=1.21.0"
   },
   "devDependencies": {
+    "@types/node": "^13.1.4",
+    "@types/yargs": "^13.0.4",
+    "colors": "^1.4.0",
     "concurrently": "^5.0.2",
+    "dotenv": "^8.2.0",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "yargs": "^15.1.0"
   }
 }
