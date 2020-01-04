@@ -11,7 +11,9 @@
     "sourceMap": true,
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      // Vuetify Typescript Fix
+      "vuetify"
     ],
     "paths": {
       "@/*": [
@@ -23,6 +25,11 @@
       "dom",
       "dom.iterable",
       "scripthost"
+    ],
+    // Vuetify Typescript Fix
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/vuetify/types"
     ]
   },
   "include": [
