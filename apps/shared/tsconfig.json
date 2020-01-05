@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig",
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**"
+    ]
+  }
+}

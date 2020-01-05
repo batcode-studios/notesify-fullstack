@@ -13,10 +13,16 @@
     "email": "emjimadhu@gmail.com"
   },
   "license": "ISC",
+  "scripts": {
+    "lint": "tslint --project ."
+  },
   "homepage": "https://bitbucket.org/batcodestudios/notesify-fullstack#readme",
   "engines": {
     "node": ">=12.0.0",
     "npm": ">=6.0.0",
     "yarn": ">=1.21.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.20.1"
   }
 }

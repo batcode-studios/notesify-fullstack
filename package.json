@@ -11,6 +11,7 @@
     "test:client:unit": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:unit",
     "test:client:e2e": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:e2e",
     "dev:barrel:shared": "barrel-maintainer apps/shared/src --includeRootDir --singleQuotes --ts",
+    "dev:shared:lint": "cd apps/shared && yarn lint",
     "dev:root:lint": "tslint --project .",
     "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts",
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
