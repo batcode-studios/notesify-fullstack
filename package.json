@@ -14,7 +14,7 @@
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
     "utils:add:client:vue-package": "cd apps/client && yarn add:package $1",
     "utils:add:client:npm-package": "cd apps/client && yarn add $1 $2",
-    "utils:add:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts -- --type=component",
+    "utils:create:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts",
     "utils:install-packages:client": "cd apps/client && yarn install",
     "utils:install-packages:shared": "cd apps/shared && yarn install",
     "dev:root:lint": "tslint --project .",
@@ -39,11 +39,13 @@
     "yarn": ">=1.21.0"
   },
   "devDependencies": {
+    "@types/inquirer": "^6.5.0",
     "@types/node": "^13.1.4",
     "@types/yargs": "^13.0.4",
     "colors": "^1.4.0",
     "concurrently": "^5.0.2",
     "dotenv": "^8.2.0",
+    "inquirer": "^7.0.2",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",

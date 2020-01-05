@@ -1,28 +1,59 @@
 /* tslint:disable: no-console */
-import { existsSync, mkdirSync, writeFile } from 'fs';
+import { existsSync, mkdirSync, PathLike, writeFile } from 'fs';
 import { bold, green, red } from 'colors';
-import { typescriptTemplate } from './constants';
+import { IExtraClientFiles } from './constants';
+import { serviceTemplate, storeTemplate, typescriptTemplate } from './templates';
 
-const isDirectoryExist = (directoryName) => {
-  return existsSync(directoryName);
+const isFileOrDirectoryExist = (fileOrDirectoryName: PathLike): boolean => {
+  return existsSync(fileOrDirectoryName);
 };
 
-const selectTemplate = (type, fileName) => {
+const selectTemplate = (type: string, fileName: string, isServiceSelected: boolean): string => {
   if (type === 'ts') {
-    return typescriptTemplate(fileName);
+    return typescriptTemplate(fileName, isServiceSelected);
   } else {
     return '';
   }
 };
 
-export const createClientFile = (directoryName, fileName, fileType) => {
-  if (!isDirectoryExist(directoryName)) {
+export const createClientDirectory = (directoryName: PathLike): void => {
+  if (!isFileOrDirectoryExist(directoryName)) {
     mkdirSync(directoryName);
   }
-  createFile(`${directoryName}/${fileName}.component.${fileType}`, selectTemplate(fileType, fileName));
 };
 
-export const createFile = (filePath: string, fileData: any): void => {
+export const createClientComponentFile = (directoryName: PathLike, fileName: string, extensionType: string, isServiceSelected: boolean, createFileForcefully: boolean): void => {
+  if (!isFileOrDirectoryExist(directoryName)) {
+    mkdirSync(directoryName);
+  }
+  checkFileAndCreate(`${directoryName}/${fileName}.component.${extensionType}`, selectTemplate(extensionType, fileName, isServiceSelected), createFileForcefully);
+};
+
+export const createClientServiceFile = (directoryName: PathLike, fileName: string, createFileForcefully: boolean): void => {
+  if (!isFileOrDirectoryExist(directoryName)) {
+    mkdirSync(directoryName);
+  }
+  checkFileAndCreate(`${directoryName}/${fileName}.service.ts`, serviceTemplate(fileName), createFileForcefully);
+};
+
+export const createClientStoreFile = (directoryName: PathLike, fileName: string, createFileForcefully: boolean): void => {
+  if (!isFileOrDirectoryExist(directoryName)) {
+    mkdirSync(directoryName);
+  }
+  checkFileAndCreate(`${directoryName}/${fileName}.store.ts`, storeTemplate(fileName), createFileForcefully);
+};
+
+const checkFileAndCreate = (filePath: string, fileData: any, createFileForcefully: boolean): void => {
+  if (createFileForcefully) {
+    createFile(filePath, fileData);
+  } else if (!createFileForcefully && !isFileOrDirectoryExist(filePath)) {
+    createFile(filePath, fileData);
+  } else {
+    console.log(red(`File Exists: ${bold(`${filePath}`)}`));
+  }
+};
+
+export const createFile = (filePath: PathLike, fileData: any): void => {
   writeFile(filePath, fileData, (error: any): void => {
     if (error) {
       console.log(red(`Error Message: ${bold(`There was a problem creating ${filePath}`)}`));
@@ -32,7 +63,7 @@ export const createFile = (filePath: string, fileData: any): void => {
   });
 };
 
-export const capitalize = (fileName) => {
+export const capitalize = (fileName): string => {
   return fileName
   .toLowerCase()
   .split('-')
@@ -47,4 +78,11 @@ export const enumToArray = (value: any): any => {
   .map((key: string) => {
     return value[key];
   });
+};
+
+export const arrayToObject = (value: string[]): IExtraClientFiles => {
+  return value.reduce((result: {}, item: string, index: number, array: string[]) => {
+    result[item] = item;
+    return result;
+  }, {});
 };

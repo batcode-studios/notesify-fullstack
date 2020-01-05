@@ -1,5 +1,3 @@
-import { capitalize } from './utilities';
-
 export enum RunConfiguration {
   Production = 'prod',
   Staging = 'stag',
@@ -8,18 +6,20 @@ export enum RunConfiguration {
 }
 
 export enum ClientFileTypes {
-  COMPONENT = 'component'
+  COMPONENT = 'component',
+  SERVICE = 'service',
+  STORE = 'store'
 }
 
-export const typescriptTemplate = (name) => {
-  return `import { Component, Vue } from 'vue-property-decorator';
-
-// @ts-ignore
-import WithRender from './${name}.component.html?style=./${name}.component.scss';
-
-@WithRender
-@Component
-export default class ${capitalize(name)} extends Vue {
+export interface IExtraClientFiles {
+  Store?: string;
+  Service?: string;
 }
-`;
-};
+
+export interface IClientPromptAnswers {
+  fileType: string;
+  fileName: string;
+  filePath: string;
+  otherFiles?: string[];
+  canCreateFileForcefully: boolean;
+}

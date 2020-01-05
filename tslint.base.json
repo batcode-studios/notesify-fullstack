@@ -62,6 +62,10 @@
     "triple-equals": [
       true,
       "allow-null-check"
+    ],
+    "max-line-length": [
+      true,
+      260
     ]
   }
 }
