@@ -5,8 +5,8 @@ import VueTypeScriptInject from 'vue-typescript-inject';
 import AppComponent from './app.component';
 import './register-service-worker';
 import router from './router';
-import store from './store';
 import vuetify from './plugins/vuetify';
+import { store } from './store';
 
 Vue.config.productionTip = false;
 
