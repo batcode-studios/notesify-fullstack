@@ -10,6 +10,7 @@
     "test:client:unit": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:unit",
     "test:client:e2e": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn test:e2e",
     "dev:barrel:shared": "barrel-maintainer apps/shared/src --includeRootDir --singleQuotes --ts",
+    "dev:root:lint": "tslint --project .",
     "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts",
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
     "utils:add:client:vue-package": "cd apps/client && yarn add:package $1",
@@ -17,7 +18,6 @@
     "utils:create:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts",
     "utils:install-packages:client": "cd apps/client && yarn install",
     "utils:install-packages:shared": "cd apps/shared && yarn install",
-    "dev:root:lint": "tslint --project .",
     "preinstall": "$npm_execpath --silent run checkYarn",
     "postinstall": "yarn utils:install-packages:shared && yarn utils:install-packages:client",
     "checkYarn": "echo \"$npm_execpath\" | grep -q \"yarn\\.js$\" || (echo '⚠️  Use YARN not NPM! ⚠️ ' && echo && exit 1)"
@@ -45,11 +45,17 @@
     "colors": "^1.4.0",
     "concurrently": "^5.0.2",
     "dotenv": "^8.2.0",
+    "husky": "^3.1.0",
     "inquirer": "^7.0.2",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "^3.7.4",
     "yargs": "^15.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn dev:root:lint && yarn dev:client:lint"
+    }
   }
 }
