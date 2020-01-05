@@ -4,6 +4,7 @@
   "description": "A Notes taking for Developers from a Developer",
   "private": true,
   "scripts": {
+    "dev:all:start": "concurrently --names \"CLIENT,SHARED\" -c \"yellow.bold,yellow.bold\" \"yarn dev:client:start\" \"yarn dev:barrel:shared\"",
     "dev:client:start": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn serve",
     "dev:client:lint": "yarn substep:set-environment:client -- --environment=dev && cd apps/client && yarn lint",
     "prod:client:build": "yarn substep:set-environment:client -- --environment=prod && cd apps/client && yarn build",
