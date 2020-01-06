@@ -1,5 +1,26 @@
 import Vue from 'vue';
-import Vuetify, { VApp, VAppBar, VBtn, VContainer, VContent, VFlex, VIcon, VImg, VLayout, VSpacer } from 'vuetify/lib';
+import Vuetify, {
+  VAlert,
+  VApp,
+  VAppBar,
+  VBtn,
+  VCard,
+  VCardActions,
+  VCardText,
+  VContainer,
+  VContent,
+  VFlex,
+  VForm,
+  VIcon,
+  VImg,
+  VLayout,
+  VParallax,
+  VSpacer,
+  VTextField,
+  VToolbar,
+  VToolbarTitle,
+  VTooltip
+} from 'vuetify/lib';
 
 Vue.use(Vuetify, {
   components: {
@@ -12,14 +33,24 @@ Vue.use(Vuetify, {
     VContent,
     VContainer,
     VLayout,
-    VFlex
+    VFlex,
+    VToolbarTitle,
+    VParallax,
+    VCard,
+    VToolbar,
+    VTooltip,
+    VCardText,
+    VForm,
+    VTextField,
+    VCardActions,
+    VAlert
   }
 });
 
 export default new Vuetify({
   theme: {
     options: {
-      customProperties: true,
+      customProperties: true
     },
     themes: {
       light: {
@@ -31,9 +62,18 @@ export default new Vuetify({
         success: '#4CAF50',
         warning: '#FFC107'
       },
-    },
+      dark: {
+        primary: '#ee44aa',
+        secondary: '#424242',
+        accent: '#82B1FF',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FFC107'
+      }
+    }
   },
   icons: {
-    iconfont: 'md',
-  },
+    iconfont: 'md'
+  }
 });
