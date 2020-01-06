@@ -1,17 +1,16 @@
 import { capitalize } from './utilities';
 
 export const typescriptTemplate = (name: string, isServiceSelected: boolean): string => {
-  return `import { Component, Vue } from 'vue-property-decorator';
-import { ${capitalize(name)}Service } from './${name}.service';
+  return `import { Component, Vue } from 'vue-property-decorator';${isServiceSelected ? `\nimport { inject } from 'vue-typescript-inject';` : ''}
 
 // @ts-ignore
-import WithRender from './${name}.component.html?style=./${name}.component.scss';
+import WithRender from './${name}.component.html?style=./${name}.component.scss';${isServiceSelected ? `\nimport { ${capitalize(name)}Service } from './${name}.service';` : ''}
 
 @WithRender
 ${isServiceSelected ? `@Component({
   providers: [${capitalize(name)}Service]
 })` : `@Component`}
-export default class ${capitalize(name)}Component extends Vue {
+export default class ${capitalize(name)}Component extends Vue {${isServiceSelected ? `\n  @inject() private readonly ${name}Service!: ${capitalize(name)}Service;` : ''}
 }
 `;
 };
