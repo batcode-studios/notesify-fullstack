@@ -1,21 +1,18 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-
-import HomeComponent from '../pages/home/home.component';
-import AboutComponent from '../views/about/about.component';
+import VueRouter, { RouteConfig } from 'vue-router';
+import { StartRoutePaths } from '../pages/start/start.routing';
 
 Vue.use(VueRouter);
 
-const routes = [
+const routes: RouteConfig[] = [
   {
     path: '/',
-    name: 'home',
-    component: HomeComponent
+    redirect: '/start'
   },
+  ...StartRoutePaths,
   {
-    path: '/about',
-    name: 'about',
-    component: AboutComponent
+    path: '*',
+    redirect: '/start'
   }
 ];
 
