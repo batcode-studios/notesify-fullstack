@@ -32,8 +32,9 @@
                 rounded
                 v-model="email"
                 :disabled="waitingForServer"
-                :error="emailError.state"
-                :error-messages="emailError.message"
+                :error-messages="emailErrors"
+                @input="emailOnInput"
+                @blur="$v.email.$touch()"
                 :solo="!appStore.appDarkMode"
                 :solo-inverted="appStore.appDarkMode"
                 autofocus
@@ -47,8 +48,7 @@
                 rounded
                 v-model="password"
                 :disabled="waitingForServer"
-                :error="passwordError.state"
-                :error-messages="passwordError.message"
+                @input="alert.state = false"
                 :append-icon="showPassword ? 'visibility' : 'visibility_off'"
                 :type="showPassword ? 'text' : 'password'"
                 @click:append="showPassword = !showPassword"
@@ -74,11 +74,22 @@
                 :large="!waitingForServer"
                 @click="login"
                 depressed
+                :disabled="$v.$invalid"
               >
                 Login
               </v-btn>
             </v-layout>
           </v-card-actions>
+          <v-alert
+            :value="alert.state"
+            color="red"
+            dark
+            border="top"
+            icon="priority_high"
+            transition="slide-y-transition"
+          >
+            {{ alert.message }}
+          </v-alert>
           <v-card-actions class="pa-3">
             <v-flex
               md6
@@ -125,13 +136,6 @@
               <v-btn depressed rounded :disabled="waitingForServer" to="/start/register">register</v-btn>
             </p>
           </v-layout>
-          <!--          <v-toolbar-->
-          <!--            dense-->
-          <!--            flat-->
-          <!--          >-->
-          <!--            <p>New to Notesify? Click here to goto register.</p>-->
-          <!--&lt;!&ndash;            <p v-else>{{ 'Already have account? Click here.'.toCapitalize() }}</p>&ndash;&gt;-->
-          <!--          </v-toolbar>-->
         </v-card>
       </v-flex>
     </v-layout>

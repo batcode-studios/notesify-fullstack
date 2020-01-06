@@ -1,5 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { inject } from 'vue-typescript-inject';
+import { email, required } from 'vuelidate/lib/validators';
 // @ts-ignore
 import WithRender from './login.component.html?style=./login.component.scss';
 import { AuthenticationService } from '../authentication.service';
@@ -14,40 +15,50 @@ export default class LoginComponent extends Vue {
   public password = '';
   public showPassword = false;
   public waitingForServer = false;
-  public emailError = {
+  public alert = {
     state: false,
     message: ''
   };
-  public passwordError = {
-    state: false,
-    message: ''
-  };
-  public showAlert = false;
 
   public appStore = StoreProxy.app;
 
   @inject() private readonly authenticationService!: AuthenticationService;
 
-  public login() {
-    if (!this.email) {
-      this.emailError.state = true;
-      this.emailError.message = 'Username is wrong!';
+  public get emailErrors(): string[] {
+    const errors: string[] = [];
+    if (!this.$v.email!.$dirty) {
+      return errors;
     }
-    if (!this.password) {
-      this.passwordError.state = true;
-      this.passwordError.message = 'Password is wrong!';
+    if (!this.$v.email!.email) {
+      errors.push('Must be a valid e-mail');
     }
-    if (this.email && this.password) {
-      // this.showAlert = true;
-      this.emailError.state = false;
-      this.emailError.message = '';
-      this.passwordError.state = false;
-      this.passwordError.message = '';
+    if (!this.$v.email!.required) {
+      errors.push('E-Mail is required');
+    }
+    return errors;
+  }
+
+  public emailOnInput(): void {
+    // @ts-ignore
+    this.$v.email.$touch();
+    this.alert.state = false;
+  }
+
+  public login(): void {
+    if (!this.$v.$invalid) {
       this.waitingForServer = true;
       setTimeout(() => {
-        this.showAlert = false;
         this.waitingForServer = false;
       }, 5000);
     }
+  }
+
+  public validations(): any {
+    return {
+      email: {
+        required,
+        email
+      }
+    };
   }
 }
