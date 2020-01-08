@@ -1,0 +1,61 @@
+<v-card
+  class="elevation-12"
+  :loading="waitingForServer"
+>
+  <v-toolbar
+    flat
+  >
+    <v-layout justify-center="">
+      <v-toolbar-title class="authentication__container--title">{{ 'verify email'.toUpperCase() }}</v-toolbar-title>
+    </v-layout>
+  </v-toolbar>
+  <v-card-text
+    class="text-center"
+  >
+    <v-progress-circular
+      :size="80"
+      :width="4"
+      color="primary"
+      indeterminate
+      v-if="waitingForServer"
+      class="mb-7"
+    ></v-progress-circular>
+    <div
+      class="success-checkmark"
+      v-else-if="!alert.state"
+    >
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <div
+      class="error-checkmark"
+      v-else
+    >
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+
+    <p
+      class="headline"
+    >
+      {{ (waitingForServer) ? 'Verifying...' : (!alert.state) ? 'E-Mail verification success. Redirecting back to
+      LOGIN.' : 'Some Error' }}
+    </p>
+  </v-card-text>
+  <v-layout
+    justify-center
+    class="pt-5"
+  >
+    <p>Go back to
+      <v-btn depressed rounded :disabled="waitingForServer" to="/start/auth?mode=login">login</v-btn>
+    </p>
+  </v-layout>
+</v-card>

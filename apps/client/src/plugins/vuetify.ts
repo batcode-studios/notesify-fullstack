@@ -1,26 +1,5 @@
 import Vue from 'vue';
-import Vuetify, {
-  VAlert,
-  VApp,
-  VAppBar,
-  VBtn,
-  VCard,
-  VCardActions,
-  VCardText,
-  VContainer,
-  VContent,
-  VFlex,
-  VForm,
-  VIcon,
-  VImg,
-  VLayout,
-  VParallax,
-  VSpacer,
-  VTextField,
-  VToolbar,
-  VToolbarTitle,
-  VTooltip
-} from 'vuetify/lib';
+import Vuetify, { VAlert, VApp, VAppBar, VBtn, VCard, VCardActions, VCardText, VContainer, VContent, VFlex, VForm, VIcon, VImg, VLayout, VParallax, VProgressCircular, VSpacer, VTextField, VToolbar, VToolbarTitle, VTooltip } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
   components: {
@@ -43,7 +22,8 @@ Vue.use(Vuetify, {
     VForm,
     VTextField,
     VCardActions,
-    VAlert
+    VAlert,
+    VProgressCircular
   }
 });
 
