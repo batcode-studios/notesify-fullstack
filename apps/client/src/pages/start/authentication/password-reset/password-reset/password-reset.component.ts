@@ -1,8 +1,8 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { inject } from 'vue-typescript-inject';
 import { minLength, required, sameAs } from 'vuelidate/lib/validators';
 // @ts-ignore
-import WithRender from './password-reset-edit.component.html?style=./password-reset-edit.component.scss';
+import WithRender from './password-reset.component.html?style=./password-reset.component.scss';
 import { StoreProxy } from '../../../../../store';
 import { AuthenticationService } from '../../authentication.service';
 
@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../authentication.service';
 @Component({
   providers: [AuthenticationService]
 })
-export default class PasswordResetEditComponent extends Vue {
+export default class PasswordResetComponent extends Vue {
   public password = '';
   public repeatPassword = '';
   public showPassword = false;
@@ -20,6 +20,9 @@ export default class PasswordResetEditComponent extends Vue {
     state: false,
     message: ''
   };
+  public actionCode: string | (string | null)[] = '';
+  public continueUrl: string | (string | null)[] = '';
+  public lang: string | (string | null)[] = '';
 
   public appStore = StoreProxy.app;
 
@@ -50,6 +53,12 @@ export default class PasswordResetEditComponent extends Vue {
       errors.push('Confirmation Password must be same');
     }
     return errors;
+  }
+
+  public creaated(): void {
+    this.actionCode = this.$route.query.oobCode;
+    this.continueUrl = this.$route.query.continueUrl;
+    this.lang = this.$route.query.lang;
   }
 
   public passwordOnInput(): void {
@@ -83,5 +92,12 @@ export default class PasswordResetEditComponent extends Vue {
         sameAsPassword: sameAs('password')
       }
     };
+  }
+
+  @Watch('$route.query')
+  public onRouteChange(newValue: any, oldValue: any) {
+    this.actionCode = newValue.oobCode;
+    this.continueUrl = newValue.continueUrl;
+    this.lang = newValue.lang;
   }
 }

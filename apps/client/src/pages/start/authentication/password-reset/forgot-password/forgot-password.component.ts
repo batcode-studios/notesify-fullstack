@@ -2,7 +2,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { inject } from 'vue-typescript-inject';
 import { email, required } from 'vuelidate/lib/validators';
 // @ts-ignore
-import WithRender from './password-reset-send.component.html?style=./password-reset-send.component.scss';
+import WithRender from './forgot-password.component.html?style=./forgot-password.component.scss';
 import { StoreProxy } from '../../../../../store';
 import { AuthenticationService } from '../../authentication.service';
 
@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../authentication.service';
 @Component({
   providers: [AuthenticationService]
 })
-export default class PasswordResetSendComponent extends Vue {
+export default class ForgotPasswordComponent extends Vue {
   public email = '';
   public waitingForServer = false;
   public alert = {

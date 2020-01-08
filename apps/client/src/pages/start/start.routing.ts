@@ -4,33 +4,56 @@ import StartComponent from './start.component';
 import HomeComponent from './home/home.component';
 import LoginComponent from './authentication/login/login.component';
 import RegisterComponent from './authentication/register/register.component';
-import PasswordResetSendComponent from './authentication/password-reset/password-reset-send/password-reset-send.component';
-import PasswordResetEditComponent from './authentication/password-reset/password-reset-edit/password-reset-edit.component';
+import ForgotPasswordComponent from './authentication/password-reset/forgot-password/forgot-password.component';
+import PasswordResetComponent from './authentication/password-reset/password-reset/password-reset.component';
+import AuthenticationComponent from './authentication/authentication.component';
+import { AppRoutePaths } from '../../_common/app-route.enum';
+import { AuthRoutePaths, StartRoutePaths } from './_common/start-route.enum';
+import VerifyEmailComponent from './authentication/verify-email/verify-email.component';
 
-export const StartRoutePaths: RouteConfig[] = [
+export const StartRoutes: RouteConfig[] = [
   {
-    path: '/start',
+    path: `/${AppRoutePaths.START}`,
     component: StartComponent,
     children: [
       {
-        path: '',
+        path: AppRoutePaths.EMPTY,
         component: HomeComponent
       },
       {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      },
-      {
-        path: 'forgot-password',
-        component: PasswordResetSendComponent
-      },
-      {
-        path: 'reset-password',
-        component: PasswordResetEditComponent
+        path: StartRoutePaths.AUTH,
+        component: AuthenticationComponent,
+        children: [
+          {
+            path: AppRoutePaths.EMPTY,
+            component: LoginComponent
+          },
+          {
+            path: AuthRoutePaths.LOGIN,
+            name: AuthRoutePaths.LOGIN,
+            component: LoginComponent
+          },
+          {
+            path: AuthRoutePaths.REGISTER,
+            name: AuthRoutePaths.REGISTER,
+            component: RegisterComponent
+          },
+          {
+            path: AuthRoutePaths.FORGOT_PASSWORD,
+            name: AuthRoutePaths.FORGOT_PASSWORD,
+            component: ForgotPasswordComponent
+          },
+          {
+            path: AuthRoutePaths.PASSWORD_RESET,
+            name: AuthRoutePaths.PASSWORD_RESET,
+            component: PasswordResetComponent
+          },
+          {
+            path: AuthRoutePaths.VERIFY_EMAIL,
+            name: AuthRoutePaths.VERIFY_EMAIL,
+            component: VerifyEmailComponent
+          }
+        ]
       }
     ]
   }
