@@ -27,6 +27,7 @@
     "utils:add:client:npm-package": "cd apps/client && yarn add $1 $2",
     "utils:add:server:npm-package": "cd apps/server && yarn add $1 $2",
     "utils:create:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts",
+    "utils:create:server:files": "cd apps/server && nest",
     "utils:install-packages:all": "yarn utils:install-packages:shared && yarn utils:install-packages:client && yarn utils:install-packages:server",
     "utils:install-packages:client": "cd apps/client && yarn install",
     "utils:install-packages:server": "cd apps/server && yarn install",
