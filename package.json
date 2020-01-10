@@ -14,6 +14,7 @@
     "dev:shared:lint": "cd apps/shared && yarn lint",
     "dev:root:lint": "tslint --project .",
     "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts",
+    "substep:set-environment:server": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-server-environment.ts",
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
     "utils:add:client:vue-package": "cd apps/client && yarn add:package $1",
     "utils:add:client:npm-package": "cd apps/client && yarn add $1 $2",
