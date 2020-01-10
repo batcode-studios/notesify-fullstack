@@ -6,19 +6,20 @@
   "scripts": {
     "dev:all:start": "concurrently --names \"CLIENT,SERVER,SHARED\" -c \"yellow.bold,yellow.bold,yellow.bold\" \"yarn dev:client:start\" \"yarn dev:server:start\" \"yarn dev:barrel:shared\"",
     "dev:client:start": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn serve",
-    "dev:client:lint": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn lint",
-    "prod:client:build": "yarn substep:set-environment:client --environment=prod && cd apps/client && yarn build",
-    "test:client:unit": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn test:unit",
-    "test:client:e2e": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn test:e2e",
     "dev:server:start": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn start:dev",
-    "prod:server:start": "yarn substep:set-environment:server --environment=prod && cd apps/server && yarn start:prod",
-    "dev:server:lint": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn lint",
-    "prod:server:build": "yarn substep:set-environment:server --environment=prod && cd apps/server && yarn build",
-    "test:server:unit": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn test",
-    "test:server:e2e": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn test:e2e",
-    "dev:barrel:shared": "barrel-maintainer apps/shared/src --includeRootDir --singleQuotes --ts",
-    "dev:shared:lint": "cd apps/shared && yarn lint",
+    "dev:all:lint": "yarn dev:root:lint && yarn dev:client:lint && yarn dev:server:lint && yarn dev:shared:lint",
     "dev:root:lint": "tslint --project .",
+    "dev:client:lint": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn lint",
+    "dev:server:lint": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn lint",
+    "dev:shared:lint": "cd apps/shared && yarn lint",
+    "prod:client:build": "yarn substep:set-environment:client --environment=prod && cd apps/client && yarn build",
+    "prod:server:build": "yarn substep:set-environment:server --environment=prod && cd apps/server && yarn build",
+    "test:client:unit": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn test:unit",
+    "test:server:unit": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn test",
+    "test:client:e2e": "yarn substep:set-environment:client --environment=dev && cd apps/client && yarn test:e2e",
+    "test:server:e2e": "yarn substep:set-environment:server --environment=dev && cd apps/server && yarn test:e2e",
+    "prod:server:start": "yarn substep:set-environment:server --environment=prod && cd apps/server && yarn start:prod",
+    "dev:barrel:shared": "barrel-maintainer apps/shared/src --includeRootDir --singleQuotes --ts",
     "substep:set-environment:client": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-client-environment.ts",
     "substep:set-environment:server": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/set-server-environment.ts",
     "utils:remove-node-modules": "rimraf node_modules apps/*/node_modules",
@@ -26,11 +27,12 @@
     "utils:add:client:npm-package": "cd apps/client && yarn add $1 $2",
     "utils:add:server:npm-package": "cd apps/server && yarn add $1 $2",
     "utils:create:client:files": "ts-node --compiler-options='{\"module\":\"commonJs\"}' tools/create-client-files.ts",
+    "utils:install-packages:all": "yarn utils:install-packages:shared && yarn utils:install-packages:client && yarn utils:install-packages:server",
     "utils:install-packages:client": "cd apps/client && yarn install",
     "utils:install-packages:server": "cd apps/server && yarn install",
     "utils:install-packages:shared": "cd apps/shared && yarn install",
     "preinstall": "$npm_execpath --silent run checkYarn",
-    "postinstall": "yarn utils:install-packages:shared && yarn utils:install-packages:client && yarn utils:install-packages:server",
+    "postinstall": "yarn utils:install-packages:all",
     "checkYarn": "echo \"$npm_execpath\" | grep -q \"yarn\\.js$\" || (echo '⚠️  Use YARN not NPM! ⚠️ ' && echo && exit 1)"
   },
   "repository": {
@@ -66,7 +68,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn dev:root:lint && yarn dev:client:lint && yarn dev:server:lint"
+      "pre-push": "yarn dev:all:lint"
     }
   }
 }
