@@ -1,0 +1,25 @@
+# Project information
+site_name: 'Notesify Docs'
+site_description: 'A Notes app for the develops by the develop'
+site_author: 'Em Ji Madhu / Batcode Studios'
+
+# Repository
+repo_name: 'Github'
+repo_url: 'https://github.com/batcode-studios/notesify-fullstack'
+
+# Copyright
+copyright: 'Copyright &copy; 2020 - Batcode Studios'
+
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'deep orange'
+    accent: 'deep orange'
+  logo:
+    icon: 'edit'
+
+extra:
+  social:
+    - type: 'bitbucket'
+      link: 'https://bitbucket.org/batcodestudios/notesify-fullstack'
