@@ -14,7 +14,7 @@
   },
   "license": "ISC",
   "scripts": {
-    "lint": "tslint --project ."
+    "lint": "tslint --project . -c tslint.json"
   },
   "homepage": "https://bitbucket.org/batcodestudios/notesify-fullstack#readme",
   "engines": {
